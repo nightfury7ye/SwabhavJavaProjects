@@ -1,0 +1,19 @@
+package com.techlabs.EmpDept;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class TestOfficeDB {
+
+	public static void main(String[] args) {
+		OfficeDB officeDB = OfficeDB.getDBconnection();
+		List<Department> departments = new ArrayList<>();
+		departments.add(new Department(10, "ACCOUNTING", "NEW YORK"));
+		departments.add(new Department(20,"RESEARCH","DALLAS"));
+		departments.add(new Department(30,"SALES","CHICAGO"));
+		departments.add(new Department(40,"OPERATIONS","BOSTON"));
+		
+		officeDB.insertDEPT(departments);
+	}
+
+}

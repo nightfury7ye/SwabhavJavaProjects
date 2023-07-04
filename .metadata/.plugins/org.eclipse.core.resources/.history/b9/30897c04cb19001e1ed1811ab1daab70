@@ -1,0 +1,106 @@
+package com.techlabs.EmpDept;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+
+import org.omg.CosNaming.NamingContextPackage.AlreadyBound;
+
+import com.mysql.cj.xdevapi.Table;
+
+public class OfficeDB {
+	private static OfficeDB officeDB;
+	private static String localhost_url = "jdbc:mysql://localhost/";
+//	private static String db_url = "jdbc:mysql://localhost/OFFICE";
+	private static String user = "root";
+	private static String pass = "Praveen7ye";
+	private Connection connection = null;
+	private Statement statement;
+	private OfficeDB() {
+		connect();
+	}
+	public static OfficeDB getDBconnection() {
+		if(officeDB == null)
+			officeDB = new OfficeDB();
+		return officeDB;
+	}
+	
+	void connect() {
+		try {
+			if(connection == null) {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				connection = DriverManager.getConnection(localhost_url, user, pass);
+				createStatement();
+				createDatabase();
+				System.out.println("Connecton Established");
+				createDepartmentTable();
+				createEmployeeTable();
+			}
+			else {
+			System.out.println("Connecton Already Established");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	void createStatement() throws SQLException {
+		statement = connection.createStatement();
+	}
+	void createDatabase() throws SQLException {
+		try {
+	        statement.execute("CREATE DATABASE OFFICE");
+	        System.out.println("Database created successfully...");  
+		} catch (SQLException e) {
+			statement.execute("USE OFFICE");
+		}
+	};
+	void createDepartmentTable() {
+		String DeptQuery = "CREATE TABLE DEPT ("
+				+ "DEPTNO integer NOT NULL,"
+				+ "DNAME varchar(14),"
+				+ "LOC varchar(13),"
+				+ "CONSTRAINT DEPT_PRIMARY_KEY PRIMARY KEY (DEPTNO))";
+		try {
+			statement.execute(DeptQuery);
+		} catch (SQLException e) {
+			System.out.println("DEPT Table Already exists");
+		}
+	}
+	void createEmployeeTable() {
+		String EmpQuery = " CREATE TABLE EMP ("
+				+ " EMPNO integer NOT NULL,"
+				+ " ENAME varchar(10),"
+				+ " JOB varchar(9),"
+				+ " MGR integer,"
+				+ " HIREDATE DATEtime,"
+				+ " SAL DECIMAL(10,2),"
+				+ " COMM DECIMAL(10,2),"
+				+ " DEPTNO integer NOT NULL,"
+				+ " CONSTRAINT EMP_FOREIGN_KEY FOREIGN KEY (DEPTNO) REFERENCES DEPT (DEPTNO),"
+				+ " CONSTRAINT EMP_PRIMARY_KEY PRIMARY KEY (EMPNO));";
+		try {
+			statement.execute(EmpQuery);
+		} catch (SQLException e) {
+			System.out.println("EMP Table Already exists");
+		}
+	}
+	
+	void insertDEPT(List<Department> deptList) {
+		for(Department dept: deptList) {
+			try {
+				PreparedStatement preparedStatement = connection.prepareStatement("insert into DEPT (DEPTNO, DNAME, LOC) value(?,?,?)");
+				preparedStatement.setInt(1, dept.getDeptNO());
+				preparedStatement.setString(2, dept.getdNAME());
+				preparedStatement.setString(3, dept.getLoc());
+				System.out.println("Row inserted");
+			} catch (SQLException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+}

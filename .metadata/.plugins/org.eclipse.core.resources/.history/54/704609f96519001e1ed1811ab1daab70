@@ -1,0 +1,48 @@
+package com.techlabs.DBconnection;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class DBconnection {
+	private static DBconnection dBconnection;
+	Connection connection = null;
+	Statement statement;
+	private DBconnection() {
+		
+	}
+	public static DBconnection getDBconnection() {
+		if(dBconnection == null)
+			dBconnection = new DBconnection();
+		return dBconnection;
+	}
+	
+	void connect() {
+		try {
+			if(connection == null) {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ORGANIZATION","root","Praveen7ye");
+				System.out.println("Connecton Established");
+			}
+			else {
+			System.out.println("Connecton Already Established");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	ResultSet execute(String query) {
+		try {
+			statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			return resultSet;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+}

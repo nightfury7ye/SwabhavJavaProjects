@@ -1,0 +1,12 @@
+package com.techlabs.DBconnection;
+
+public class testDB {
+
+	public static void main(String[] args) {
+		DBconnection dBconnection = new DBconnection();
+		dBconnection.connect();
+		dBconnection.connect();
+		dBconnection.execute("select * from EMP");
+	}
+
+}

@@ -1,0 +1,13 @@
+package com.techlabs.DBconnection;
+
+public class testDB {
+
+	public static void main(String[] args) {
+		DBconnection dBconnection = DBconnection.getDBconnection();
+		dBconnection.connect();
+		dBconnection.connect();
+		dBconnection.execute("select * from REGIONS");
+
+	}
+
+}

@@ -1,0 +1,10 @@
+package com.techlabs.EmpDept;
+
+public class TestOfficeDB {
+
+	public static void main(String[] args) {
+		OfficeDB officeDB = OfficeDB.getDBconnection();
+		
+	}
+
+}

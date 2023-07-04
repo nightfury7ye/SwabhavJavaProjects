@@ -1,0 +1,99 @@
+package com.techlabs.EmpDept;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class TestOfficeDB {
+
+	public static void main(String[] args) {
+		OfficeDB officeDB = OfficeDB.getDBconnection();
+//		List<Department> departments = new ArrayList<>();
+//		departments.add(new Department(10, "ACCOUNTING", "NEW YORK"));
+//		departments.add(new Department(20,"RESEARCH","DALLAS"));
+//		departments.add(new Department(30,"SALES","CHICAGO"));
+//		departments.add(new Department(40,"OPERATIONS","BOSTON"));
+//		
+//		officeDB.insertALLDEPT(departments);
+//		List<Employee> employees = new ArrayList<>();
+//        employees.add(new Employee(7839, null, 10, "KING", "PRESIDENT", Date.valueOf("1981-11-17"), 5000, null));
+//        employees.add(new Employee(7698, 7839, 30, "BLAKE", "MANAGER", Date.valueOf("1981-05-01"), 2850, null));
+//        employees.add(new Employee(7782, 7839, 10, "CLARK", "MANAGER", Date.valueOf("1981-06-09"), 2450, null));
+//        employees.add(new Employee(7566, 7839, 20, "JONES", "MANAGER", Date.valueOf("1981-04-02"), 2975, null));
+//        employees.add(new Employee(7654, 7698, 30, "MARTIN", "SALESMAN", Date.valueOf("1981-09-28"), 1250, 1400.00));
+//        employees.add(new Employee(7499, 7698, 30, "ALLEN", "SALESMAN", Date.valueOf("1981-02-20"), 1600, 300.00));
+//        employees.add(new Employee(7844, 7698, 30, "TURNER", "SALESMAN", Date.valueOf("1981-09-08"), 1500, 0.00));
+//        employees.add(new Employee(7900, 7698, 30, "JAMES", "CLERK", Date.valueOf("1981-12-03"), 950, null));
+//        employees.add(new Employee(7521, 7698, 30, "WARD", "SALESMAN", Date.valueOf("1981-02-22"), 1250, 500.00));
+//        employees.add(new Employee(7902, 7566, 20, "FORD", "ANALYST", Date.valueOf("1981-12-03"), 3000, null));
+		
+//        employees.add(new Employee(7369, 7902, 20, "SMITH", "CLERK", Date.valueOf("1980-12-17"), 800, null));
+		
+//        employees.add(new Employee(7788, 7566, 20, "SCOTT", "ANALYST", Date.valueOf("1982-12-09"), 3000, null));
+//        employees.add(new Employee(7876, 7788, 20, "ADAMS", "CLERK", Date.valueOf("1983-01-12"), 1100, null));
+//        employees.add(new Employee(7934, 7782, 10, "MILLER", "CLERK", Date.valueOf("1982-01-23"), 1300, null));
+//        officeDB.insertALLEMP(employees);
+//        officeDB.displayAllEmpWithDeptName();
+//        officeDB.displayEMP();
+//        officeDB.displayDEPT();
+//      officeDB.incrementComm();
+//      officeDB.deleteSalaryLessThan();
+        
+        Scanner scanner = new Scanner(System.in);
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        boolean end = false;
+        do {
+            displayMenu();
+            System.out.println();
+            int choice = scanner.nextInt();
+            switch (choice) {
+                case 1:
+                    officeDB.insertDEPT(reader);
+                    break;
+                case 2:
+                	officeDB.insertEMP(reader);
+                    break;
+                case 3:
+                	officeDB.displayAllEmpWithDeptName(scanner);
+                    break;
+                case 4:
+                	officeDB.incrementComm();
+                    break;
+                case 5:
+                	officeDB.deleteSalaryLessThan(scanner);
+                    break;
+                case 6:
+                	officeDB.displayEMP();
+                    break;
+                case 7:
+                	officeDB.displayDEPT();
+                    break;
+                case 8:
+                	end = true;
+                    System.out.println("Exiting the program...");
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
+            }
+            System.out.println();
+        } while (end == false);
+        
+	}
+	
+    private static void displayMenu() {
+        System.out.println("---------- MENU ----------");
+        System.out.println("1. Insert Records into Department");
+        System.out.println("2. Insert Records into Employee");
+        System.out.println("3. Display Employees in a particular Department");
+        System.out.println("4. Update Employee Records (Increase Commission by 20%)");
+        System.out.println("5. Delete Employees by Salary");
+        System.out.println("6. Display All Employees");
+        System.out.println("7. Display All Departments");
+        System.out.println("8. Exit");
+        System.out.print("Enter your choice: ");
+    }
+
+}

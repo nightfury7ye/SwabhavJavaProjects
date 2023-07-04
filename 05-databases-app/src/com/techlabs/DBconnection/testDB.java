@@ -1,0 +1,19 @@
+package com.techlabs.DBconnection;
+
+import java.sql.SQLException;
+
+public class testDB {
+
+	public static void main(String[] args) throws SQLException {
+		DBconnection dBconnection = DBconnection.getDBconnection();
+		dBconnection.connect();
+		dBconnection.execute("select * from REGIONS");
+		dBconnection.insertRegion();
+//		dBconnection.updateRegion();
+//		dBconnection.execute("select * from REGIONS");
+//		dBconnection.deleteRegion();
+		dBconnection.execute("select * from REGIONS");
+
+	}
+
+}

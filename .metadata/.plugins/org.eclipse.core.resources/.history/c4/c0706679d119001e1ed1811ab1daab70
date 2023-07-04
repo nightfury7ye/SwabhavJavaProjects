@@ -1,0 +1,35 @@
+package com.techlabs.EmpDept;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
+
+public class TestOfficeDB {
+
+	public static void main(String[] args) {
+		OfficeDB officeDB = OfficeDB.getDBconnection();
+		List<Department> departments = new ArrayList<>();
+		departments.add(new Department(10, "ACCOUNTING", "NEW YORK"));
+		departments.add(new Department(20,"RESEARCH","DALLAS"));
+		departments.add(new Department(30,"SALES","CHICAGO"));
+		departments.add(new Department(40,"OPERATIONS","BOSTON"));
+		
+		officeDB.insertDEPT(departments);
+		List<Employee> employees = new ArrayList<>();
+        employees.add(new Employee(7839, null, 10, "KING", "PRESIDENT", Date.valueOf("1981-11-17"), 5000, null));
+        employees.add(new Employee(7698, 7839, 30, "BLAKE", "MANAGER", Date.valueOf("1981-05-01"), 2850, null));
+        employees.add(new Employee(7782, 7839, 10, "CLARK", "MANAGER", Date.valueOf("1981-06-09"), 2450, null));
+        employees.add(new Employee(7566, 7839, 20, "JONES", "MANAGER", Date.valueOf("1981-04-02"), 2975, null));
+        employees.add(new Employee(7654, 7698, 30, "MARTIN", "SALESMAN", Date.valueOf("1981-09-28"), 1250, 1400.00));
+        employees.add(new Employee(7499, 7698, 30, "ALLEN", "SALESMAN", Date.valueOf("1981-02-20"), 1600, 300.00));
+        employees.add(new Employee(7844, 7698, 30, "TURNER", "SALESMAN", Date.valueOf("1981-09-08"), 1500, 0.00));
+        employees.add(new Employee(7900, 7698, 30, "JAMES", "CLERK", Date.valueOf("1981-12-03"), 950, null));
+        employees.add(new Employee(7521, 7698, 30, "WARD", "SALESMAN", Date.valueOf("1981-02-22"), 1250, 500.00));
+        employees.add(new Employee(7902, 7566, 20, "FORD", "ANALYST", Date.valueOf("1981-12-03"), 3000, null));
+        employees.add(new Employee(7369, 7902, 20, "SMITH", "CLERK", Date.valueOf("1980-12-17"), 800, null));
+        employees.add(new Employee(7788, 7566, 20, "SCOTT", "ANALYST", Date.valueOf("1982-12-09"), 3000, null));
+        employees.add(new Employee(7876, 7788, 20, "ADAMS", "CLERK", Date.valueOf("1983-01-12"), 1100, null));
+        employees.add(new Employee(7934, 7782, 10, "MILLER", "CLERK", Date.valueOf("1982-01-23"), 1300, null));
+	}
+
+}

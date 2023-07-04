@@ -1,0 +1,21 @@
+package com.techlabs.DBconnection;
+
+import java.sql.ResultSet;
+
+public class testDB {
+
+	public static void main(String[] args) {
+		DBconnection dBconnection = DBconnection.getDBconnection();
+		dBconnection.connect();
+		dBconnection.connect();
+		ResultSet resultSet = dBconnection.execute("select * from EMP");
+		try {
+			while(resultSet.next()) {
+				System.out.println(resultSet.getInt("EMPNO")+ "\t" + resultSet.getString("ENAME"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

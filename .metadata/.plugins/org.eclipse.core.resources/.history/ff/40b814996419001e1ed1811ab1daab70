@@ -1,0 +1,44 @@
+package com.techlabs.DBconnection;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+public class DBconnection {
+	public static DBconnection dBconnection;
+	Connection connection = null;
+	Statement statement;
+	public DBconnection() {
+		
+	}
+	public static DBconnection getDBconnection() {
+		if(dBconnection == null)
+			dBconnection = new DBconnection();
+		return dBconnection;
+	}
+	
+	void connect() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/ORGANIZATION","root","Praveen7ye");
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	void execute(String query) {
+		try {
+			statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery(query);
+			while(resultSet.next()) {
+				System.out.println(resultSet.getInt("EMPNO")+ "\t" + resultSet.getString("ENAME"));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+}

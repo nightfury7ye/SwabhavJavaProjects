@@ -1,0 +1,74 @@
+package com.techlabs.EmpDept;
+
+import java.sql.Date;
+
+public class Employee {
+	private int empNO;
+	private Integer manager, deptNO;
+	private String eNAME, job ;
+	private Date hireDate;
+	private Double sal, comm;
+	
+	public Employee(int empNO, Integer manager, Integer deptNO, String eNAME, String job, Date hireDate, Double sal,
+			Double comm) {
+		super();
+		this.empNO = empNO;
+		this.manager = manager;
+		this.deptNO = deptNO;
+		this.eNAME = eNAME;
+		this.job = job;
+		this.hireDate = hireDate;
+		this.sal = sal;
+		this.comm = comm;
+	}
+	public int getEmpNO() {
+		return empNO;
+	}
+	public void setEmpNO(int empNO) {
+		this.empNO = empNO;
+	}
+	public Integer getManager() {
+		return manager;
+	}
+	public void setManager(Integer manager) {
+		this.manager = manager;
+	}
+	public Integer getDeptNO() {
+		return deptNO;
+	}
+	public void setDeptNO(Integer deptNO) {
+		this.deptNO = deptNO;
+	}
+	public String geteNAME() {
+		return eNAME;
+	}
+	public void seteNAME(String eNAME) {
+		this.eNAME = eNAME;
+	}
+	public String getJob() {
+		return job;
+	}
+	public void setJob(String job) {
+		this.job = job;
+	}
+	public Date getHireDate() {
+		return hireDate;
+	}
+	public void setHireDate(Date hireDate) {
+		this.hireDate = hireDate;
+	}
+	public Double getSal() {
+		return sal;
+	}
+	public void setSal(Double sal) {
+		this.sal = sal;
+	}
+	public Double getComm() {
+		return comm;
+	}
+	public void setComm(Double comm) {
+		this.comm = comm;
+	}
+	
+	
+}
